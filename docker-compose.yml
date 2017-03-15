@@ -1,0 +1,45 @@
+nginx:
+  build: _docker/nginx
+  environment:
+    VIRTUAL_HOST: wp-test-demo
+  links:
+    - php
+  ports:
+    - "8080:80"
+  volumes:
+    - .:/app
+
+php:
+  build: _docker/php
+  links:
+    - db
+    - es
+  volumes:
+    - .:/app
+  working_dir: /app
+
+data:
+  image: busybox
+  volumes:
+    - /var/lib/mysql
+
+db:
+  image: mysql
+  volumes_from:
+    - data
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: wordpress
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
+
+es:
+  image: elasticsearch
+
+pma:
+  image: phpmyadmin/phpmyadmin
+  links:
+    - db
+  environment:
+    VIRTUAL_HOST: wp-pma.docker
+

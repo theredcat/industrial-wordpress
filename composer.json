@@ -1,0 +1,51 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "johnpbloch/wordpress": "^4.6",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "symfony/console": "^3.2",
+        "symfony/yaml": "^3.2",
+        "solarium/solarium": "^3.7"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ]
+    },
+    "extra": {
+        "wordpress-install-dir": "wp",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_webp_host": "DATABASE_WEBP_HOST",
+                "database_webp_port": "DATABASE_WEBP_PORT",
+                "database_webp_name": "DATABASE_WEBP_NAME",
+                "database_webp_user": "DATABASE_WEBP_USER",
+                "database_webp_password": "DATABASE_WEBP_PASSWORD",
+
+                "database_wp_host": "DATABASE_WP_HOST",
+                "database_wp_port": "DATABASE_WP_PORT",
+                "database_wp_name": "DATABASE_WP_NAME",
+                "database_wp_user": "DATABASE_WP_USER",
+                "database_wp_password": "DATABASE_WP_PASSWORD",
+
+                "aws_key_id": "AWS_KEY_ID",
+                "aws_access_key": "AWS_ACCESS_KEY",
+
+                "solr_host": "SOLR_HOST",
+                "solr_port": "SOLR_PORT",
+                "solr_path": "SOLR_PATH",
+                "solr_core": "SOLR_CORE"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": { "": "src/" }
+    }
+}

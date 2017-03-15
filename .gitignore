@@ -1,0 +1,7 @@
+vendor/
+
+.DS_Store
+.jscsrc
+.jshintignore
+**/*.swp
+/app/config/parameters.yml
