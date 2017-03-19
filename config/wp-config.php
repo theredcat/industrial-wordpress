@@ -39,20 +39,16 @@ define('NONCE_SALT',       '|>pm}82QKm0?iX#F~VjG1O|o^wU@;8pzq9R1smx@G*(Ux8u#(267
  * For developers: WordPress debugging mode.
  */
 define('WP_DEBUG', $config['debug']);
-define ('WPLANG', $config['locale']);
+define('WPLANG', $config['locale']);
 
-$configElasticsearch = array(
-    'endpoint' => array(
-        $config['elasticsearch_host'] => array(
-            'host' => $config['elasticsearch_host'],
-            'port' => $config['elasticsearch_port'],
-            'index' => $config['elasticsearch_index']
-        )
-    )
-);
+// ** Cache settings ** //
+define('WP_CACHE', $config['cache']);
 
+// ** Elasticsearch settings ** //
+define('EP_HOST', $config['elasticpress_host'].':'.$config['elasticpress_port']);
+define('EP_INDEX_PREFIX', $config['elasticpress_index_prefix']);
+define('EP_IS_NETWORK', $config['elasticpress_network']);
 
-/* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
 if ( !defined('ABSPATH') )

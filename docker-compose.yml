@@ -14,6 +14,7 @@ php:
   links:
     - db
     - es
+    - redis
   volumes:
     - .:/app
   working_dir: /app
@@ -30,16 +31,11 @@ db:
   environment:
     MYSQL_ROOT_PASSWORD: root
     MYSQL_DATABASE: wordpress
-    MYSQL_USER: root
-    MYSQL_PASSWORD: root
+    MYSQL_USER: wordpress
+    MYSQL_PASSWORD: dk8e_z-e5e
 
 es:
   image: elasticsearch
 
-pma:
-  image: phpmyadmin/phpmyadmin
-  links:
-    - db
-  environment:
-    VIRTUAL_HOST: wp-pma.docker
-
+redis:
+  image: redis

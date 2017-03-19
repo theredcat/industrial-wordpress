@@ -36,11 +36,14 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install opcache
 RUN pecl install imagick && docker-php-ext-enable imagick
 RUN pecl install memcached && docker-php-ext-enable memcached
+RUN pecl install redis && docker-php-ext-enable redis
+RUN pecl install apcu && docker-php-ext-enable apcu
 RUN pecl install yaml-2.0.0 && docker-php-ext-enable yaml
 
-RUN echo "memory_limit = 64M;" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
+RUN echo "memory_limit = 32M;" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
 RUN echo "max_execution_time = 200;" >> "/usr/local/etc/php/conf.d/max_execution_time.ini"
 RUN echo "date.timezone='Europe/Paris'" >> "/usr/local/etc/php/conf.d/timezone.ini"
 

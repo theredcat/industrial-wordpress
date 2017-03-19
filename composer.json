@@ -11,7 +11,8 @@
         "wp-cli/wp-cli" : "1.1.0",
         "psy/psysh" : "0.8.2",
         "incenteev/composer-parameter-handler": "2.1.2",
-        "wpackagist-plugin/elasticpress": "^2.2"
+        "wpackagist-plugin/elasticpress": "^2.2",
+        "wpackagist-plugin/w3-total-cache": "0.9.5.2"
     },
     "scripts": {
         "post-install-cmd": [
