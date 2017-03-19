@@ -6,29 +6,30 @@
         }
     ],
     "require": {
-        "php": ">=5.4",
-        "johnpbloch/wordpress": "^4.6",
-        "incenteev/composer-parameter-handler": "^2.0",
-        "symfony/console": "^3.2",
-        "symfony/yaml": "^3.2",
-        "solarium/solarium": "^3.7"
+        "php": ">=7.0",
+        "johnpbloch/wordpress": "4.7.3",
+        "wp-cli/wp-cli" : "1.1.0",
+        "psy/psysh" : "0.8.2",
+        "incenteev/composer-parameter-handler": "2.1.2",
+        "wpackagist-plugin/elasticpress": "^2.2"
     },
     "scripts": {
         "post-install-cmd": [
+            "test -f wp/wp-content/plugins/hello.php && rm wp/wp-content/plugins/hello.php || true",
+            "test -f config/parameters.yml && rm config/parameters.yml || true",
+            "cp config/wp-config.php wp/",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
     "extra": {
         "wordpress-install-dir": "wp",
+        "installer-paths": {
+            "wp/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "wp/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        },
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml",
+            "file": "config/parameters.yml",
             "env-map": {
-                "database_webp_host": "DATABASE_WEBP_HOST",
-                "database_webp_port": "DATABASE_WEBP_PORT",
-                "database_webp_name": "DATABASE_WEBP_NAME",
-                "database_webp_user": "DATABASE_WEBP_USER",
-                "database_webp_password": "DATABASE_WEBP_PASSWORD",
-
                 "database_wp_host": "DATABASE_WP_HOST",
                 "database_wp_port": "DATABASE_WP_PORT",
                 "database_wp_name": "DATABASE_WP_NAME",
@@ -38,14 +39,16 @@
                 "aws_key_id": "AWS_KEY_ID",
                 "aws_access_key": "AWS_ACCESS_KEY",
 
-                "solr_host": "SOLR_HOST",
-                "solr_port": "SOLR_PORT",
-                "solr_path": "SOLR_PATH",
-                "solr_core": "SOLR_CORE"
+                "elasticsearch_host": "ELASTICSEARCH_HOST",
+                "elasticsearch_port": "ELASTICSEARCH_PORT",
+                "elasticsearch_index": "ELASTICSEARCH_INDEX",
+
+                "wordpress_title": "WORDPRESS_TITLE",
+                "wordpress_username": "WORDPRESS_USERNAME",
+                "wordpress_password": "WORDPRESS_PASSWORD",
+                "wordpress_email": "WORDPRESS_EMAIL",
+                "wordpress_language": "WORDPRESS_LANGUAGE"
             }
         }
-    },
-    "autoload": {
-        "psr-4": { "": "src/" }
     }
 }

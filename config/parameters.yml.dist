@@ -1,0 +1,24 @@
+parameters:
+    database_wp_host: db
+    database_wp_port: 3306
+    database_wp_name: wordpress
+    database_wp_user: root
+    database_wp_password: root
+    database_wp_charset: utf8
+    database_wp_collate: ""
+    database_wp_table_prefix: wp_
+
+    aws_key_id: ~
+    aws_access_key: ~
+
+    debug: true
+
+    elasticsearch_host: localhost
+    elasticsearch_port: 9200
+    elasticsearch_core: elasticpress
+
+    wordpress_title: My Wordpress
+    wordpress_username: admin
+    wordpress_password: jfMAg8d_Z%dz-E
+    wordpress_email: admin@word.press
+    wordpress_language: en_US

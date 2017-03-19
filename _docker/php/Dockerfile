@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     supervisor \
     libmemcached-dev \
+    libyaml-dev \
     && apt-get clean \
     && rm -rf /var/lib/app/lists/*
 
@@ -37,6 +38,7 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install bcmath
 RUN pecl install imagick && docker-php-ext-enable imagick
 RUN pecl install memcached && docker-php-ext-enable memcached
+RUN pecl install yaml-2.0.0 && docker-php-ext-enable yaml
 
 RUN echo "memory_limit = 64M;" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
 RUN echo "max_execution_time = 200;" >> "/usr/local/etc/php/conf.d/max_execution_time.ini"
@@ -46,6 +48,10 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/sbin/composer
 
 RUN usermod -u 1000 www-data
+RUN usermod -s /bin/bash www-data
+
+RUN wget -O /wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
 
 VOLUME ["/etc/supervisor/conf.d"]
 

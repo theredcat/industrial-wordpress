@@ -1,7 +1,8 @@
 vendor/
-
+composer.lock
 .DS_Store
 .jscsrc
 .jshintignore
 **/*.swp
-/app/config/parameters.yml
+config/parameters.yml
+wp/
