@@ -11,14 +11,16 @@
         "wp-cli/wp-cli" : "1.1.0",
         "psy/psysh" : "0.8.2",
         "incenteev/composer-parameter-handler": "2.1.2",
-        "wpackagist-plugin/elasticpress": "^2.2",
-        "wpackagist-plugin/w3-total-cache": "0.9.5.2"
+        "wpackagist-plugin/elasticpress": "2.2",
+        "wpackagist-plugin/w3-total-cache": "0.9.5.2",
+        "wpackagist-plugin/woocommerce": "2.6.14",
+        "wpackagist-plugin/wordpress-seo": "4.4"
+    },
+    "require-dev": {
+        "wpackagist-plugin/wordpress-importer": "0.6.3"
     },
     "scripts": {
         "post-install-cmd": [
-            "test -f wp/wp-content/plugins/hello.php && rm wp/wp-content/plugins/hello.php || true",
-            "test -f config/parameters.yml && rm config/parameters.yml || true",
-            "cp config/wp-config.php wp/",
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
@@ -40,9 +42,11 @@
                 "aws_key_id": "AWS_KEY_ID",
                 "aws_access_key": "AWS_ACCESS_KEY",
 
-                "elasticsearch_host": "ELASTICSEARCH_HOST",
-                "elasticsearch_port": "ELASTICSEARCH_PORT",
-                "elasticsearch_index": "ELASTICSEARCH_INDEX",
+                "elasticpress_host": "ELASTICPRESS_HOST",
+                "elasticpress_port": "ELASTICPRESS_PORT",
+                "elasticpress_index": "ELASTICPRESS_INDEX",
+                "elasticpress_index_prefix": "ELASTICPRESS_INDEX_PREFIX",
+                "elasticpress_network": "ELASTICPRESS_NETWORK",
 
                 "wordpress_title": "WORDPRESS_TITLE",
                 "wordpress_username": "WORDPRESS_USERNAME",

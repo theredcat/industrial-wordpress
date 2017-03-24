@@ -45,7 +45,7 @@ define('WPLANG', $config['locale']);
 define('WP_CACHE', $config['cache']);
 
 // ** Elasticsearch settings ** //
-define('EP_HOST', $config['elasticpress_host'].':'.$config['elasticpress_port']);
+define('EP_HOST', $config['elasticpress_protocol'].'://'.$config['elasticpress_host'].':'.$config['elasticpress_port']);
 define('EP_INDEX_PREFIX', $config['elasticpress_index_prefix']);
 define('EP_IS_NETWORK', $config['elasticpress_network']);
 

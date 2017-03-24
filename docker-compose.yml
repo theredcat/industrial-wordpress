@@ -18,16 +18,10 @@ php:
   volumes:
     - .:/app
   working_dir: /app
-
-data:
-  image: busybox
-  volumes:
-    - /var/lib/mysql
+  user: "1000"
 
 db:
   image: mysql
-  volumes_from:
-    - data
   environment:
     MYSQL_ROOT_PASSWORD: root
     MYSQL_DATABASE: wordpress

@@ -14,7 +14,7 @@ parameters:
     debug: true
     cache: true
 
-    elasticpress_host: localhost
+    elasticpress_host: es
     elasticpress_port: 9200
     elasticpress_index_prefix: elasticpress
     elasticpress_network: true

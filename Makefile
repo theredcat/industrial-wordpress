@@ -1,6 +1,12 @@
+install:
+	composer install
+	test -f wp/wp-content/plugins/hello.php && rm wp/wp-content/plugins/hello.php || true
+	cp src/wp-config.php wp/
+	cp config/nginx.conf wp/
+
 clean:
 	rm -f config/parameters.yml
 
 clear: clean
 	rm -fr wp/ vendor/
-	sudo docker-compose rm
+	docker-compose rm -f
