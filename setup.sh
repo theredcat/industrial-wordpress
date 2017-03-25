@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 set -e
 
 make install
@@ -18,10 +17,12 @@ cd $wp_dir
 if ! ../vendor/bin/wp core is-installed; then
 	echo "Installing wordpress"
 	../vendor/bin/wp core install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
+fi
 
-	echo "Activating all plugins"
-	../vendor/bin/wp plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1|xargs ../vendor/bin/wp plugin activate
+echo "Activating all plugins"
+../vendor/bin/wp plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1|xargs ../vendor/bin/wp plugin activate
 
+if ! ../vendor/bin/wp core is-installed; then
     echo "Configuring W3 Total cache"
     ../vendor/bin/wp total-cache option set minify.enabled 1
     ../vendor/bin/wp total-cache option set minify.engine redis

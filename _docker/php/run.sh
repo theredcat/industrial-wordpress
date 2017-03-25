@@ -5,6 +5,6 @@
 
 cd /app
 
-./configure
+make setup
 
 php-fpm

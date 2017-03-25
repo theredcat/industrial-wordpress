@@ -14,7 +14,8 @@
         "wpackagist-plugin/elasticpress": "2.2",
         "wpackagist-plugin/w3-total-cache": "0.9.5.2",
         "wpackagist-plugin/woocommerce": "2.6.14",
-        "wpackagist-plugin/wordpress-seo": "4.4"
+        "wpackagist-plugin/wordpress-seo": "4.5",
+        "wpackagist-plugin/search-autocomplete": "2.1.16"
     },
     "require-dev": {
         "wpackagist-plugin/wordpress-importer": "0.6.3"
