@@ -5,7 +5,7 @@ install:
 	cp config/nginx.conf wp/
 
 setup:
-    ./setup.sh
+	./setup.sh
 
 clean:
 	rm -f config/parameters.yml
