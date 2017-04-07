@@ -53,6 +53,14 @@ install:
         cp -R src/my-awesome-theme wp/wp-content/themes
 ```
 
+Automatic configuration of a plugin/theme
+-----------------------------------------
+The best option to configure a plugin or a theme is to use wp-cli (included in this setup). In the `setup.sh` file, just add your commands for the autoconfiguration.
+
+If it's a command that should be runned only at install time, put it outside the block `if ! ../vendor/bin/wp core is-installed`.  If it should be run at every `docker-compuse up` (like the "activate all plugins" task) put it outside this block
+
+To test if your plugin can be used/configured with wp-cli, run the docker-compose, get inside the php container using a `docker-compose run php bash` , go to `/app/wp` and use wp-cli via `../vendor/bin/wp`. YOU MUST BE INSIDE THE `wp` DIRECTORY (command `pwd` should show `/app/wp`).
+
 Add a configuration in Wordpress via a `define`
 -----------------------------------------------
 First, go to `config/parameters.yml.dist` (NEVER EVER MODIFY OR COMMIT THE `parameters.yml` file) and add your setting. You can use arrays or map, but for simplivity sake, you should stay with a flat key/value file.
