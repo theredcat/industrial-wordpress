@@ -39,8 +39,10 @@ Go to https://wpackagist.org/ and search for a plugin/theme
 
 Click on the version of the plugin to install
 
-Copy/paste the generated line in `composer.json` in the `require` section
-
+Then run:
+```
+#> composer require wpackagist-plugin/your-plugin
+```
 
 
 Add a custom plugin/theme
