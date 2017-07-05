@@ -39,7 +39,12 @@ define('NONCE_SALT',       '|>pm}82QKm0?iX#F~VjG1O|o^wU@;8pzq9R1smx@G*(Ux8u#(267
  * For developers: WordPress debugging mode.
  */
 define('WP_DEBUG', $config['debug']);
+
+// ** Locale setting ** //
 define('WPLANG', $config['locale']);
+
+// ** Wordpress.com update check ** //
+define( 'WP_AUTO_UPDATE_CORE', false );
 
 // ** Cache settings ** //
 define('WP_CACHE', $config['cache']);

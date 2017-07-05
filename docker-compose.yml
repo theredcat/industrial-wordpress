@@ -15,6 +15,7 @@ php:
     - db
     - es
     - redis
+    - fakes3ssl:testbucket.s3.amazonaws.com
   volumes:
     - .:/app
   working_dir: /app
@@ -33,3 +34,18 @@ es:
 
 redis:
   image: redis
+
+fakes3:
+  image: lphoward/fake-s3
+  ports:
+    - "4569:4569"
+
+fakes3ssl:
+  image: cbachich/ssl-proxy
+  ports:
+    - "443:443"
+  links:
+    - fakes3:proxyapp
+  environment:
+    - PORT=443
+    - TARGET_PORT=4569

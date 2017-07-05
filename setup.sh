@@ -6,23 +6,27 @@ make install
 wp_dir=$(php -r 'echo json_decode(file_get_contents("/app/composer.json"), true)["extra"]["wordpress-install-dir"];')
 wp_parameters=$(php -r 'echo json_decode(file_get_contents("/app/composer.json"), true)["extra"]["incenteev-parameters"]["file"];')
 
-email=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wordpress_email"];')
-password=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wordpress_password"];')
-admin=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wordpress_username"];')
-title=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wordpress_title"];')
-url=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wordpress_url"];')
+email=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_email"];')
+password=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_password"];')
+admin=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_username"];')
+title=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_title"];')
+url=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_url"];')
 
 cd $wp_dir
 
 if ! ../vendor/bin/wp core is-installed; then
 	echo "Installing wordpress"
 	../vendor/bin/wp core install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
+
+    do_setup_plugins=true
+else
+    do_setup_plugins=false
 fi
 
 echo "Activating all plugins"
 ../vendor/bin/wp plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1|xargs ../vendor/bin/wp plugin activate
 
-if ! ../vendor/bin/wp core is-installed; then
+if $do_setup_plugins; then
     echo "Configuring W3 Total cache"
     ../vendor/bin/wp total-cache option set minify.enabled 1
     ../vendor/bin/wp total-cache option set minify.engine redis

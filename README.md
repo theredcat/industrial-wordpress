@@ -24,14 +24,15 @@ This line in the composer.json :
 ```
 mean that you should have a environnement variable `DATABASE_WP_HOST` when running `make install`.
 
+Note that variables names in the `composer.json` starting with `docker_` are only used for bootstrap purposes in a development docker environement.
+
 If you're deploying using a home made tool, you should be able to do this:
 ```
 #> export DATABASE_WP_HOST="my.production.database"
 #> export DATABASE_WP_PORT="3306"
 [... do this for all vars in composer.json...]
-#> my_deploy_script.sh
+#> my_deploy_script.sh # must contain a "make install"
 ```
-
 
 Add a plugin/theme
 ------------------
@@ -40,7 +41,6 @@ Go to https://wpackagist.org/ and search for a plugin/theme
 Click on the version of the plugin to install
 
 Copy/paste the generated line in `composer.json` in the `require` section
-
 
 
 Add a custom plugin/theme
@@ -63,6 +63,8 @@ To test if your plugin can be used/configured with wp-cli, run the docker-compos
 
 Add a configuration in Wordpress via a `define`
 -----------------------------------------------
+If you need to add a parameter in the `wp-config.php` for your plugin, Follow these steps :
+
 First, go to `config/parameters.yml.dist` (NEVER EVER MODIFY OR COMMIT THE `parameters.yml` file) and add your setting. You can use arrays or map, but for simplivity sake, you should stay with a flat key/value file.
 
 Second, open `composer.json` and create the mapping in the `extra:incenteev-parameters:env-map` section. Usually, you should use for environement variable the same name as your setting in the `parameters.yml.dist`, but in uppercase

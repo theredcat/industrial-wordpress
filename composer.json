@@ -7,15 +7,15 @@
     ],
     "require": {
         "php": ">=7.0",
-        "johnpbloch/wordpress": "4.7.3",
-        "wp-cli/wp-cli" : "1.1.0",
-        "psy/psysh" : "0.8.2",
+        "johnpbloch/wordpress": "4.8.0",
+        "wp-cli/wp-cli" : "1.2.1",
+        "psy/psysh" : "0.8.8",
         "incenteev/composer-parameter-handler": "2.1.2",
-        "wpackagist-plugin/elasticpress": "2.2",
-        "wpackagist-plugin/w3-total-cache": "0.9.5.2",
-        "wpackagist-plugin/woocommerce": "2.6.14",
-        "wpackagist-plugin/wordpress-seo": "4.5",
-        "wpackagist-plugin/search-autocomplete": "2.1.16"
+        "wpackagist-plugin/elasticpress": "2.3.2",
+        "wpackagist-plugin/w3-total-cache": "0.9.5.4",
+        "wpackagist-plugin/woocommerce": "3.1.0",
+        "wpackagist-plugin/wordpress-seo": "4.9",
+        "wpackagist-plugin/advanced-custom-fields": "4.4.11"
     },
     "require-dev": {
         "wpackagist-plugin/wordpress-importer": "0.6.3"
@@ -49,11 +49,11 @@
                 "elasticpress_index_prefix": "ELASTICPRESS_INDEX_PREFIX",
                 "elasticpress_network": "ELASTICPRESS_NETWORK",
 
-                "wordpress_title": "WORDPRESS_TITLE",
-                "wordpress_username": "WORDPRESS_USERNAME",
-                "wordpress_password": "WORDPRESS_PASSWORD",
-                "wordpress_email": "WORDPRESS_EMAIL",
-                "wordpress_language": "WORDPRESS_LANGUAGE"
+                "docker_wordpress_title": "WORDPRESS_TITLE",
+                "docker_wordpress_username": "WORDPRESS_USERNAME",
+                "docker_wordpress_password": "WORDPRESS_PASSWORD",
+                "docker_wordpress_email": "WORDPRESS_EMAIL",
+                "docker_wordpress_language": "WORDPRESS_LANGUAGE"
             }
         }
     }

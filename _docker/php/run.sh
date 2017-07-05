@@ -5,6 +5,4 @@
 
 cd /app
 
-make setup
-
-php-fpm
+make setup && php-fpm

@@ -19,8 +19,8 @@ parameters:
     elasticpress_index_prefix: elasticpress
     elasticpress_network: true
 
-    wordpress_title: My Wordpress
-    wordpress_username: admin
-    wordpress_password: jfMAg8d_Z%dz-E
-    wordpress_email: admin@word.press
-    wordpress_url: http://localhost:8080/
+    docker_wordpress_title: My Docker Wordpress
+    docker_wordpress_username: admin
+    docker_wordpress_password: jfMAg8d_Z%dz-E
+    docker_wordpress_email: admin@word.press
+    docker_wordpress_url: http://localhost:8080/
