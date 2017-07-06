@@ -1,0 +1,3 @@
+[submodule "src/plugins/advanced-custom-fields-wpcli"]
+	path = src/plugins/advanced-custom-fields-wpcli
+	url = https://github.com/hoppinger/advanced-custom-fields-wpcli.git

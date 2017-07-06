@@ -43,6 +43,14 @@ if $do_setup_plugins; then
     ../vendor/bin/wp total-cache option set dbcache.redis.servers redis:6379
     ../vendor/bin/wp total-cache option set dbcache.redis.persistent 1
 
+    echo "Importing ACF data"
+    make acf_import
+
+    echo "Configuring Total cache for woocommerce"
+    reject_list=$(../vendor/bin/wp total-cache option get dbcache.reject.sql --type=array |head -n-1 |tail -n+2 | xargs echo| sed 's/, /,/g')
+    reject_list=$reject_list",_wc_session_"
+    ../vendor/bin/wp total-cache option set dbcache.reject.sql --type=array --delimiter=, "$reject_list"
+
     echo "Downloading and creating fake products in WooCommerce"
     woocommerce_version=$(../vendor/bin/wp plugin status woocommerce |grep -oE 'Version: [0-9.]+' |cut -d" " -f2)
 
@@ -51,6 +59,7 @@ if $do_setup_plugins; then
     ../vendor/bin/wp import dummy-data.xml --authors=create
 
     rm dummy-data.xml
+
 
     echo "Indexing data for the first time in ElasticPress"
     ../vendor/bin/wp elasticpress index --setup

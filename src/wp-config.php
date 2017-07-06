@@ -45,6 +45,7 @@ define('WPLANG', $config['locale']);
 
 // ** Wordpress.com update check ** //
 define( 'WP_AUTO_UPDATE_CORE', false );
+define( 'AUTOMATIC_UPDATER_DISABLED', true );
 
 // ** Cache settings ** //
 define('WP_CACHE', $config['cache']);

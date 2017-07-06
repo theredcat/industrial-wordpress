@@ -12,6 +12,13 @@ You may have to change user ID in the `docker-compose.yml` and/or the wordpress 
 docker-compose up --build
 </code>
 
+Helpers
+-------
+For ACF:
+  - `docker-compose exec php make acf_import` : import ACF settings
+  - `docker-compose exec php make acf_export` : export ACF settings
+
+
 Automatic deploy in production/preproduction/ci
 -----------------------------------------------
 Copy the code to your destination server and run the `make install` command. The command can also be run on a deployment server, which will install the dependencies and then transfer it to the prod/preprod server.
@@ -33,6 +40,13 @@ If you're deploying using a home made tool, you should be able to do this:
 [... do this for all vars in composer.json...]
 #> my_deploy_script.sh # must contain a "make install"
 ```
+Add a plugin/theme
+------------------
+Go to https://wpackagist.org/ and search for a plugin/theme
+
+Click on the version of the plugin to install
+
+Copy/paste the generated line in `composer.json` in the `require` section
 
 Add a plugin/theme
 ------------------
