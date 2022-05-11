@@ -12,6 +12,9 @@ admin=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_w
 title=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_title"];')
 url=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_url"];')
 
+redis_host=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["redis_host"];')
+redis_port=$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["redis_port"];')
+
 cd $wp_dir
 
 if ! ../vendor/bin/wp core is-installed; then
@@ -24,27 +27,29 @@ else
 fi
 
 echo "Activating all plugins"
-../vendor/bin/wp plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1|xargs ../vendor/bin/wp plugin activate
+for plugin in $(../vendor/bin/wp plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1); do
+	../vendor/bin/wp plugin activate "${plugin}"
+done
 
 if $do_setup_plugins; then
     echo "Configuring W3 Total cache"
     ../vendor/bin/wp total-cache option set minify.enabled 1
     ../vendor/bin/wp total-cache option set minify.engine redis
-    ../vendor/bin/wp total-cache option set minify.redis.servers redis:6379
+    ../vendor/bin/wp total-cache option set minify.redis.servers "${redis_host}:${redis_port}"
     ../vendor/bin/wp total-cache option set minify.redis.persistent 1
 
     ../vendor/bin/wp total-cache option set objectcache.enabled 1
     ../vendor/bin/wp total-cache option set objectcache.engine redis
-    ../vendor/bin/wp total-cache option set objectcache.redis.servers redis:6379
+    ../vendor/bin/wp total-cache option set objectcache.redis.servers "${redis_host}:${redis_port}"
     ../vendor/bin/wp total-cache option set objectcache.redis.persistent 1
 
     ../vendor/bin/wp total-cache option set dbcache.enabled 1
     ../vendor/bin/wp total-cache option set dbcache.engine redis
-    ../vendor/bin/wp total-cache option set dbcache.redis.servers redis:6379
+    ../vendor/bin/wp total-cache option set dbcache.redis.servers "${redis_host}:${redis_port}"
     ../vendor/bin/wp total-cache option set dbcache.redis.persistent 1
 
     echo "Importing ACF data"
-    make acf_import
+    cd .. && make acf_import && cd $wp_dir
 
     echo "Configuring Total cache for woocommerce"
     reject_list=$(../vendor/bin/wp total-cache option get dbcache.reject.sql --type=array |head -n-1 |tail -n+2 | xargs echo| sed 's/, /,/g')
@@ -59,7 +64,6 @@ if $do_setup_plugins; then
     ../vendor/bin/wp import dummy-data.xml --authors=create
 
     rm dummy-data.xml
-
 
     echo "Indexing data for the first time in ElasticPress"
     ../vendor/bin/wp elasticpress index --setup

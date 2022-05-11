@@ -6,19 +6,21 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "johnpbloch/wordpress": "4.8.0",
-        "wp-cli/wp-cli" : "1.2.1",
-        "psy/psysh" : "0.8.8",
-        "incenteev/composer-parameter-handler": "2.1.2",
-        "wpackagist-plugin/elasticpress": "2.3.2",
-        "wpackagist-plugin/w3-total-cache": "0.9.5.4",
-        "wpackagist-plugin/woocommerce": "3.1.0",
-        "wpackagist-plugin/wordpress-seo": "4.9",
-        "wpackagist-plugin/advanced-custom-fields": "4.4.11"
+        "php": ">=7.4",
+        "johnpbloch/wordpress": "5.9.3",
+        "wp-cli/wp-cli" : "2.6.0",
+        "wp-cli/core-command" : "2.1.1",
+        "wp-cli/extension-command" : "2.1.4",
+        "psy/psysh" : "0.10.4",
+        "incenteev/composer-parameter-handler": "2.1.4",
+        "wpackagist-plugin/elasticpress": "4.1.0",
+        "wpackagist-plugin/w3-total-cache": "2.2.1",
+        "wpackagist-plugin/woocommerce": "6.5.0",
+        "wpackagist-plugin/wordpress-seo": "18.8",
+        "wpackagist-plugin/advanced-custom-fields": "5.12.2"
     },
     "require-dev": {
-        "wpackagist-plugin/wordpress-importer": "0.6.3"
+        "wpackagist-plugin/wordpress-importer": "0.7"
     },
     "scripts": {
         "post-install-cmd": [
@@ -34,6 +36,8 @@
         "incenteev-parameters": {
             "file": "config/parameters.yml",
             "env-map": {
+                "locale": "LOCALE",
+
                 "database_wp_host": "DATABASE_WP_HOST",
                 "database_wp_port": "DATABASE_WP_PORT",
                 "database_wp_name": "DATABASE_WP_NAME",
@@ -48,6 +52,7 @@
                 "elasticpress_index": "ELASTICPRESS_INDEX",
                 "elasticpress_index_prefix": "ELASTICPRESS_INDEX_PREFIX",
                 "elasticpress_network": "ELASTICPRESS_NETWORK",
+                "elasticpress_protocol": "ELASTICPRESS_PROTOCOL",
 
                 "docker_wordpress_title": "WORDPRESS_TITLE",
                 "docker_wordpress_username": "WORDPRESS_USERNAME",

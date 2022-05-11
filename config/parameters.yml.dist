@@ -1,4 +1,6 @@
 parameters:
+    locale: en_US
+
     database_wp_host: db
     database_wp_port: 3306
     database_wp_name: wordpress
@@ -14,10 +16,14 @@ parameters:
     debug: true
     cache: true
 
+    redis_host: redis
+    redis_port: 6379
+
     elasticpress_host: es
     elasticpress_port: 9200
     elasticpress_index_prefix: elasticpress
     elasticpress_network: true
+    elasticpress_protocol: http
 
     docker_wordpress_title: My Docker Wordpress
     docker_wordpress_username: admin
