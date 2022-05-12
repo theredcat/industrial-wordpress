@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../vendor/autoload.php';
+
 // ** Yaml config ** //
 $config = yaml_parse_file(__DIR__.'/../config/parameters.yml');
 $config = $config['parameters'];

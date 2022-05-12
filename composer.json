@@ -1,4 +1,6 @@
 {
+    "name": "theredcat/ndustrial-wordpress",
+    "type": "project",
     "repositories": [
         {
             "type": "composer",
@@ -7,7 +9,6 @@
     ],
     "require": {
         "php": ">=7.4",
-        "johnpbloch/wordpress": "5.9.3",
         "wp-cli/wp-cli" : "2.6.0",
         "wp-cli/core-command" : "2.1.1",
         "wp-cli/extension-command" : "2.1.4",
@@ -17,13 +18,18 @@
         "wpackagist-plugin/w3-total-cache": "2.2.1",
         "wpackagist-plugin/woocommerce": "6.5.0",
         "wpackagist-plugin/wordpress-seo": "18.8",
-        "wpackagist-plugin/advanced-custom-fields": "5.12.2"
+        "wpackagist-plugin/advanced-custom-fields": "5.12.2",
+        "johnpbloch/wordpress-core-installer": "2.0.0",
+        "johnpbloch/wordpress": "5.9.3"
     },
     "require-dev": {
         "wpackagist-plugin/wordpress-importer": "0.7"
     },
     "scripts": {
         "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
@@ -60,6 +66,12 @@
                 "docker_wordpress_email": "WORDPRESS_EMAIL",
                 "docker_wordpress_language": "WORDPRESS_LANGUAGE"
             }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true,
+            "composer/installers": true
         }
     }
 }
