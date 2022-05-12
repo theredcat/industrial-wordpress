@@ -5,25 +5,44 @@
         {
             "type": "composer",
             "url": "https://wpackagist.org"
+        },
+        {
+            "url": "https://github.com/theredcat/advanced-custom-fields-wpcli.git",
+            "type": "git"
         }
     ],
     "require": {
         "php": ">=7.4",
-        "wp-cli/wp-cli" : "2.6.0",
-        "wp-cli/core-command" : "2.1.1",
-        "wp-cli/extension-command" : "2.1.4",
         "psy/psysh" : "0.10.4",
+        "johnpbloch/wordpress": "5.9.3",
+        "johnpbloch/wordpress-core-installer": "2.0.0",
         "incenteev/composer-parameter-handler": "2.1.4",
+        "wp-cli/wp-cli" : "2.6.0",
+        "wp-cli/db-command" : "2.0.20",
+        "wp-cli/cron-command" : "2.1.0",
+        "wp-cli/core-command" : "2.1.1",
+        "wp-cli/role-command" : "2.0.9",
+        "wp-cli/eval-command" : "2.1.2",
+        "wp-cli/media-command" : "2.0.12",
+        "wp-cli/import-command" : "2.0.8",
+        "wp-cli/doctor-command" : "2.1.0",
+        "wp-cli/checksum-command" : "2.1.2",
+        "wp-cli/language-command" : "2.0.12",
+        "wp-cli/extension-command" : "2.1.4",
+        "wp-cli/super-admin-command" : "2.0.10",
+        "wp-cli/search-replace-command" : "2.0.16",
+        "wp-cli/maintenance-mode-command" : "2.0.8",
         "wpackagist-plugin/elasticpress": "4.1.0",
         "wpackagist-plugin/w3-total-cache": "2.2.1",
         "wpackagist-plugin/woocommerce": "6.5.0",
         "wpackagist-plugin/wordpress-seo": "18.8",
         "wpackagist-plugin/advanced-custom-fields": "5.12.2",
-        "johnpbloch/wordpress-core-installer": "2.0.0",
-        "johnpbloch/wordpress": "5.9.3"
+        "hoppinger/advanced-custom-fields-wpcli": "dev-addComposerInstallers"
     },
     "require-dev": {
-        "wpackagist-plugin/wordpress-importer": "0.7"
+        "wpackagist-plugin/wordpress-importer": "0.7",
+        "wp-cli/profile-command" : "2.1.0",
+        "wp-cli/widget-command" : "2.1.7"
     },
     "scripts": {
         "post-install-cmd": [

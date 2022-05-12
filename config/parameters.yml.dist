@@ -13,7 +13,7 @@ parameters:
     aws_key_id: ~
     aws_access_key: ~
 
-    debug: true
+    debug: false
     cache: true
 
     redis_host: redis

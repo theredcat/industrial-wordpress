@@ -2,7 +2,10 @@ wpcli="$1"
 wpparameters="$2"
 project_root="$3"
 
--    echo "Configuring W3 Total cache"
+redis_host=$(php -r 'echo yaml_parse_file("'$wpparameters'")["parameters"]["redis_host"];')
+redis_port=$(php -r 'echo yaml_parse_file("'$wpparameters'")["parameters"]["redis_port"];')
+
+echo "Configuring W3 Total cache"
 $wpcli total-cache option set minify.enabled 1
 $wpcli total-cache option set minify.engine redis
 $wpcli total-cache option set minify.redis.servers "${redis_host}:${redis_port}"

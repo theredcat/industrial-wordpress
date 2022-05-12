@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 make install
 
@@ -23,13 +24,13 @@ if ! $wpcli core is-installed; then
 fi
 
 echo "Activating all plugins"
-plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1);"
-for plugin in ${plugin_to_activate} ; do
+plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1)"
+for plugin in ${plugin_to_activate}; do
 	$wpcli plugin activate "${plugin}"
 done
 
-for plugin in ${plugin_to_activate} ; do
-	plugin_setup_file="${project_root}/src/${plugin}/setup.sh"
+for plugin in ${plugin_to_activate}; do
+	plugin_setup_file="${project_root}/src/plugins/${plugin}/setup.sh"
 	if [ -f "${plugin_setup_file}" ]; then
 		bash "${plugin_setup_file}" "${wpcli}" "${wp_parameters}" "${project_root}"
 	fi

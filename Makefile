@@ -1,8 +1,11 @@
 install:
 	composer install --no-interaction
-	test -f wp/wp-content/plugins/hello.php && rm wp/wp-content/plugins/hello.php || true
-	cp src/wp-config.php wp/
-	cp config/nginx.conf wp/
+	wp_dir="$$(php -r 'echo json_decode(file_get_contents("/app/composer.json"), true)["extra"]["wordpress-install-dir"];')"; \
+		test -f "$$wp_dir/wp-content/plugins/hello.php" && rm "$$wp_dir/wp-content/plugins/hello.php" || true; \
+		cp src/wp-config.php $$wp_dir; \
+		cp config/nginx.conf $$wp_dir; \
+		cd "$$wp_dir/wp-content/plugins/"; \
+		git clone https://github.com/hoppinger/advanced-custom-fields-wpcli
 
 setup:
 	./setup.sh
