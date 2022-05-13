@@ -30,3 +30,4 @@ parameters:
     docker_wordpress_password: jfMAg8d_Z%dz-E
     docker_wordpress_email: admin@word.press
     docker_wordpress_url: http://localhost:8080/
+    docker_wordpress_permalink_structure: "/%postname%/"

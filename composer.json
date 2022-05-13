@@ -26,6 +26,7 @@
         "wp-cli/media-command" : "2.0.12",
         "wp-cli/import-command" : "2.0.8",
         "wp-cli/doctor-command" : "2.1.0",
+        "wp-cli/rewrite-command": "2.0.10",
         "wp-cli/checksum-command" : "2.1.2",
         "wp-cli/language-command" : "2.0.12",
         "wp-cli/extension-command" : "2.1.4",

@@ -15,6 +15,7 @@ password="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["dock
 admin="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_username"];')"
 title="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_title"];')"
 url="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_url"];')"
+permalink_structure="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_permalink_structure"];')"
 
 cd "$wp_dir"
 
@@ -22,6 +23,9 @@ if ! $wpcli core is-installed; then
 	echo "Installing wordpress"
 	$wpcli core install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
 fi
+
+echo "Setting permalink structure"
+$wpcli rewrite structure "$permalink_structure"
 
 echo "Activating all plugins"
 plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1)"
