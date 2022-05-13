@@ -5,7 +5,7 @@ install:
 		cp src/wp-config.php $$wp_dir; \
 		cp config/nginx.conf $$wp_dir; \
 		cd "$$wp_dir/wp-content/plugins/"; \
-		git clone https://github.com/hoppinger/advanced-custom-fields-wpcli
+		test -d advanced-custom-fields-wpcli || git clone https://github.com/hoppinger/advanced-custom-fields-wpcli
 
 setup:
 	./setup.sh
