@@ -36,6 +36,7 @@
         "wpackagist-plugin/elasticpress": "4.1.0",
         "wpackagist-plugin/w3-total-cache": "2.2.1",
         "wpackagist-plugin/woocommerce": "6.5.0",
+        "wpackagist-plugin/advanced-access-manager": "6.8.1",
         "wpackagist-plugin/wordpress-seo": "18.8",
         "wpackagist-plugin/advanced-custom-fields": "5.12.2",
         "hoppinger/advanced-custom-fields-wpcli": "dev-addComposerInstallers"
