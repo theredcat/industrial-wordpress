@@ -1,4 +1,4 @@
-FROM php:8.1.5-fpm-bullseye
+FROM php:8.0.19-fpm-bullseye
 
 RUN apt-get update && apt-get install -y \
     libboost-all-dev \
@@ -44,7 +44,7 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN pecl install apcu && docker-php-ext-enable apcu
 RUN pecl install yaml-2.2.2 && docker-php-ext-enable yaml
 
-RUN echo "memory_limit = 64M" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
+RUN echo "memory_limit = 128M" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
 RUN echo "max_execution_time = 200" >> "/usr/local/etc/php/conf.d/max_execution_time.ini"
 RUN echo "date.timezone='Europe/Paris'" >> "/usr/local/etc/php/conf.d/timezone.ini"
 
