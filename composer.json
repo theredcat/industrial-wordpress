@@ -44,7 +44,8 @@
     "require-dev": {
         "wpackagist-plugin/wordpress-importer": "0.7",
         "wp-cli/profile-command" : "2.1.0",
-        "wp-cli/widget-command" : "2.1.7"
+        "wp-cli/widget-command" : "2.1.7",
+        "wp-cli/scaffold-command": "2.0.16"
     },
     "scripts": {
         "post-install-cmd": [
