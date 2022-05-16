@@ -42,9 +42,6 @@ define('NONCE_SALT',       '|>pm}82QKm0?iX#F~VjG1O|o^wU@;8pzq9R1smx@G*(Ux8u#(267
  */
 define('WP_DEBUG', $config['debug']);
 
-// ** Locale setting ** //
-define('WPLANG', $config['locale']);
-
 define('WP_ALLOW_MULTISITE', true);
 
 // ** Wordpress.com update check ** //
