@@ -45,6 +45,8 @@ define('WP_DEBUG', $config['debug']);
 // ** Locale setting ** //
 define('WPLANG', $config['locale']);
 
+define('WP_ALLOW_MULTISITE', true);
+
 // ** Wordpress.com update check ** //
 define( 'WP_AUTO_UPDATE_CORE', false );
 define( 'AUTOMATIC_UPDATER_DISABLED', true );

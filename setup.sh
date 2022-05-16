@@ -16,12 +16,18 @@ admin="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_
 title="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_title"];')"
 url="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_url"];')"
 permalink_structure="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_permalink_structure"];')"
+multisite="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["docker_wordpress_multisite"];')"
 
 cd "$wp_dir"
 
 if ! $wpcli core is-installed; then
-	echo "Installing wordpress"
-	$wpcli core install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
+	if [ "$multisite" = "true" ]; then
+		echo "Installing wordpress in multisite mode"
+		$wpcli core multisite-install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
+	else
+		echo "Installing wordpress in single site mode"
+		$wpcli core install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
+	fi
 fi
 
 echo "Setting permalink structure"

@@ -86,6 +86,7 @@
                 "docker_wordpress_password": "WORDPRESS_PASSWORD",
                 "docker_wordpress_email": "WORDPRESS_EMAIL",
                 "docker_wordpress_language": "WORDPRESS_LANGUAGE"
+                "docker_wordpress_multisite": "WORDPRESS_MULTISITE"
             }
         }
     },

@@ -43,6 +43,7 @@ php:
     WORDPRESS_PASSWORD: cakeisalie
     WORDPRESS_EMAIL: contact@fake.tld
     WORDPRESS_LANGUAGE: fr
+    WORDPRESS_MULTISITE: "true"
   user: "1000"
 
 db:
