@@ -59,5 +59,10 @@ RUN chmod u+s /usr/bin/tcpdump
 
 COPY ./run.sh /
 RUN chmod +x /run.sh
+
+COPY ./entrypoint /bin/
+RUN chmod +x /bin/entrypoint
+
+ENTRYPOINT ["/bin/entrypoint"]
 CMD ["/run.sh"]
 
