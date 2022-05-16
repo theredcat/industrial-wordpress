@@ -12,13 +12,6 @@ You may have to change user ID in the `docker-compose.yml` and/or the wordpress 
 docker-compose up --build
 </code>
 
-Helpers
--------
-For ACF:
-  - `docker-compose exec php make acf_import` : import ACF settings
-  - `docker-compose exec php make acf_export` : export ACF settings
-
-
 Automatic deploy in production/preproduction/ci
 -----------------------------------------------
 Copy the code to your destination server and run the `make install` command. The command can also be run on a deployment server, which will install the dependencies and then transfer it to the prod/preprod server.
@@ -69,11 +62,11 @@ install:
 
 Automatic configuration of a plugin/theme
 -----------------------------------------
-The best option to configure a plugin or a theme is to use wp-cli (included in this setup). In the `setup.sh` file, just add your commands for the autoconfiguration.
+The best option to configure a plugin or a theme is to use wp-cli (included in this setup). 
 
-If it's a command that should be runned only at install time, put it outside the block `if ! ../vendor/bin/wp core is-installed`.  If it should be run at every `docker-compuse up` (like the "activate all plugins" task) put it outside this block
+Create a folder in this repository `src/plugins/<plugin name>` and put a `setup.sh` file inside it. Then just add your commands for the autoconfiguration in this file. Thoses commands will be executed every time the container is restarted.
 
-To test if your plugin can be used/configured with wp-cli, run the docker-compose, get inside the php container using a `docker-compose run php bash` , go to `/app/wp` and use wp-cli via `../vendor/bin/wp`. YOU MUST BE INSIDE THE `wp` DIRECTORY (command `pwd` should show `/app/wp`).
+To test if your plugin can be used/configured with wp-cli, run the docker-compose, get inside the php container using a `docker-compose run php bash` , go to `/app/wp` and use wp-cli command : `wp`. YOU MUST BE INSIDE THE `wp` DIRECTORY (command `pwd` should show `/app/wp`).
 
 Add a configuration in Wordpress via a `define`
 -----------------------------------------------
