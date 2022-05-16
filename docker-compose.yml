@@ -5,7 +5,7 @@ nginx:
   links:
     - php
   ports:
-    - "8080:80"
+    - "443:443"
   volumes:
     - .:/app
 
