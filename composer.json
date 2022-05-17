@@ -39,7 +39,8 @@
         "wpackagist-plugin/advanced-access-manager": "6.8.1",
         "wpackagist-plugin/wordpress-seo": "18.8",
         "wpackagist-plugin/advanced-custom-fields": "5.12.2",
-        "hoppinger/advanced-custom-fields-wpcli": "dev-addComposerInstallers"
+        "hoppinger/advanced-custom-fields-wpcli": "dev-addComposerInstallers",
+        "wpackagist-plugin/wp-mail-smtp": "3.4.0"
     },
     "require-dev": {
         "wpackagist-plugin/wordpress-importer": "0.7",
