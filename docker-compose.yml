@@ -9,6 +9,14 @@ nginx:
   volumes:
     - .:/app
 
+maildev:
+  image: maildev/maildev
+  command: [ '--smtp', '25' ]
+  ports:
+    - 1080:1080
+  expose:
+    - 25
+
 php:
   build: _docker/php
   links:
