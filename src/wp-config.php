@@ -42,7 +42,19 @@ define('NONCE_SALT',       '|>pm}82QKm0?iX#F~VjG1O|o^wU@;8pzq9R1smx@G*(Ux8u#(267
  */
 define('WP_DEBUG', $config['debug']);
 
-define('WP_ALLOW_MULTISITE', true);
+
+/**
+ * Multisite
+ */
+if($config['wordpress_multisite']) {
+	define( 'WP_ALLOW_MULTISITE', true);
+	define( 'MULTISITE', true );
+	define( 'SUBDOMAIN_INSTALL', false );
+	define( 'DOMAIN_CURRENT_SITE', 'www.localhost.direct' );
+	define( 'PATH_CURRENT_SITE', '/' );
+	define( 'SITE_ID_CURRENT_SITE', 1 );
+	define( 'BLOG_ID_CURRENT_SITE', 1 );
+}
 
 // ** Wordpress.com update check ** //
 define( 'WP_AUTO_UPDATE_CORE', false );

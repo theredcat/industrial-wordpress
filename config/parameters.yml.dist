@@ -25,9 +25,11 @@ parameters:
     elasticpress_network: true
     elasticpress_protocol: http
 
+    wordpress_multisite: true
+    wordpress_permalink_structure: "/%postname%/"
+
     docker_wordpress_title: My Docker Wordpress
     docker_wordpress_username: admin
     docker_wordpress_password: jfMAg8d_Z%dz-E
     docker_wordpress_email: admin@word.press
     docker_wordpress_url: https://www.localhost.direct
-    docker_wordpress_permalink_structure: "/%postname%/"
