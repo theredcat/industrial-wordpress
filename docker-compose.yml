@@ -23,6 +23,7 @@ php:
     - db
     - es
     - redis
+    - maildev
     - fakes3ssl:testbucket.s3.amazonaws.com
   volumes:
     - .:/app
