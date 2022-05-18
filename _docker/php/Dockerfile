@@ -48,8 +48,20 @@ RUN echo "memory_limit = 128M" >> "/usr/local/etc/php/conf.d/memory_limit.ini"
 RUN echo "max_execution_time = 200" >> "/usr/local/etc/php/conf.d/max_execution_time.ini"
 RUN echo "date.timezone='Europe/Paris'" >> "/usr/local/etc/php/conf.d/timezone.ini"
 
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/sbin/composer && mkdir /.composer && chmod 777 /.composer
+RUN EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"; \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"; \
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then \
+        >&2 echo 'ERROR: Invalid installer checksum'; \
+        rm composer-setup.php; \
+        exit 1; \
+    fi; \
+	php composer-setup.php --version=2.1.3 --filename=composer --install-dir=/usr/local/bin/; \
+	RESULT=$?; \
+	rm composer-setup.php; \
+	exit $RESULT;
+
+RUN mkdir /.composer && chmod 777 /.composer
 
 VOLUME /app
 
