@@ -1,4 +1,4 @@
-FROM php:8.0.19-fpm-bullseye
+FROM php:8.2.17-fpm-bullseye
 
 RUN apt-get update && apt-get install -y \
     libboost-all-dev \

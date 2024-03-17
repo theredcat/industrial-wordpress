@@ -1,87 +1,91 @@
-nginx:
-  build: _docker/nginx
-  environment:
-    VIRTUAL_HOST: wp-test-demo
-  links:
-    - php
-  ports:
-    - "443:443"
-  volumes:
-    - .:/app
-
-maildev:
-  image: maildev/maildev
-  command: [ '--smtp', '25' ]
-  ports:
-    - 1080:1080
-  expose:
-    - 25
-
-php:
-  build: _docker/php
-  links:
-    - db
-    - es
-    - redis
-    - maildev
-    - fakes3ssl:testbucket.s3.amazonaws.com
-  volumes:
-    - .:/app
-  working_dir: /app
-  environment:
-    LOCALE: en_US
-
-    DATABASE_WP_HOST: db
-    DATABASE_WP_PORT: 3306
-    DATABASE_WP_NAME: wordpress
-    DATABASE_WP_USER: wordpress
-    DATABASE_WP_PASSWORD: dk8e_z-e5e
-
-    AWS_KEY_ID:
-    AWS_ACCESS_KEY:
-
-    ELASTICPRESS_HOST: es
-    ELASTICPRESS_PORT: 9200
-    ELASTICPRESS_INDEX: wordpress
-    ELASTICPRESS_INDEX_PREFIX: wp_ 
-    ELASTICPRESS_NETWORK: "false"
-    ELASTICPRESS_PROTOCOL: "http"
-
-    WORDPRESS_TITLE: My Industrial wordpress
-    WORDPRESS_USERNAME: admin
-    WORDPRESS_PASSWORD: cakeisalie
-    WORDPRESS_EMAIL: contact@fake.tld
-    WORDPRESS_LANGUAGE: fr
-    WORDPRESS_MULTISITE: "true"
-  user: "1000"
-
-db:
-  image: mysql:8.0.29-debian
-  environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_DATABASE: wordpress
-    MYSQL_USER: wordpress
-    MYSQL_PASSWORD: dk8e_z-e5e
-
-es:
-  image: elasticsearch:7.10.1
-  environment:
-    discovery.type: single-node
-
-redis:
-  image: redis
-
-fakes3:
-  image: lphoward/fake-s3
-  ports:
-    - "4569"
-
-fakes3ssl:
-  image: cbachich/ssl-proxy
-  ports:
-    - "443"
-  links:
-    - fakes3:proxyapp
-  environment:
-    - PORT=443
-    - TARGET_PORT=4569
+services:
+  nginx:
+    build: _docker/nginx
+    environment:
+      VIRTUAL_HOST: wp-test-demo
+    links:
+      - php
+    ports:
+      - "443:443"
+    volumes:
+      - .:/app
+  
+  maildev:
+    image: maildev/maildev
+    command: [ '--smtp', '25' ]
+    ports:
+      - 1080:1080
+    expose:
+      - 25
+  
+  php:
+    build: _docker/php
+    links:
+      - db
+      - es
+      - redis
+      - maildev
+      - fakes3ssl:testbucket.s3.amazonaws.com
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      LOCALE: en_US
+  
+      DATABASE_WP_HOST: db
+      DATABASE_WP_PORT: 3306
+      DATABASE_WP_NAME: wordpress
+      DATABASE_WP_USER: wordpress
+      DATABASE_WP_PASSWORD: dk8e_z-e5e
+  
+      AWS_KEY_ID:
+      AWS_ACCESS_KEY:
+  
+      ELASTICPRESS_HOST: es
+      ELASTICPRESS_PORT: 9200
+      ELASTICPRESS_INDEX: wordpress
+      ELASTICPRESS_INDEX_PREFIX: wp_ 
+      ELASTICPRESS_NETWORK: "false"
+      ELASTICPRESS_PROTOCOL: "http"
+  
+      WORDPRESS_TITLE: My Industrial wordpress
+      WORDPRESS_USERNAME: admin
+      WORDPRESS_PASSWORD: cakeisalie
+      WORDPRESS_EMAIL: contact@fake.tld
+      WORDPRESS_LANGUAGE: fr
+      WORDPRESS_MULTISITE: "true"
+    user: "1000"
+  
+  db:
+    image: mariadb:10.11.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: dk8e_z-e5e
+  
+  es:
+    image: elasticsearch:8.12.2
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms256m -Xmx256m
+    ports:
+      - "9200"
+  
+  redis:
+    image: redis
+  
+  fakes3:
+    image: lphoward/fake-s3
+    ports:
+      - "4569"
+  
+  fakes3ssl:
+    image: cbachich/ssl-proxy
+    ports:
+      - "443"
+    links:
+      - fakes3:proxyapp
+    environment:
+      - PORT=443
+      - TARGET_PORT=4569
