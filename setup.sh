@@ -34,9 +34,18 @@ $wpcli rewrite structure "$permalink_structure"
 
 echo "Activating all plugins"
 plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1)"
+install_cache=false
 for plugin in ${plugin_to_activate}; do
-    $wpcli plugin activate "${plugin}"
+	if [ "${plugin}" = "w3-total-cache" ]; then
+		install_cache=true
+	else
+	    $wpcli plugin activate "${plugin}"
+	fi
 done
+
+if [ ${install_cache} ]; then
+	$wpcli plugin activate w3-total-cache
+fi
 
 if [ "$multisite" = "1" ]; then
     wpcli="$wpcli --url=$url"
