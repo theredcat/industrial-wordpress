@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e
-set -x
+set -euxo pipefail
 
 make install
 
@@ -20,7 +19,7 @@ multisite="$(php -r 'echo yaml_parse_file("'$wp_parameters'")["parameters"]["wor
 
 cd "$wp_dir"
 
-if ! $wpcli core is-installed; then
+if ! $wpcli core is-installed &> /dev/null; then
     if [ "$multisite" = "1" ]; then
         echo "Installing wordpress in multisite mode"
         $wpcli core multisite-install --skip-email --admin_email="$email" --admin_password="$password" --admin_user="$admin" --title="$title" --url="$url"
@@ -35,9 +34,18 @@ $wpcli rewrite structure "$permalink_structure"
 
 echo "Activating all plugins"
 plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1)"
+install_cache=false
 for plugin in ${plugin_to_activate}; do
-    $wpcli plugin activate "${plugin}"
+	if [ "${plugin}" = "w3-total-cache" ]; then
+		install_cache=true
+	else
+	    $wpcli plugin activate "${plugin}"
+	fi
 done
+
+if [ ${install_cache} ]; then
+	$wpcli plugin activate w3-total-cache
+fi
 
 if [ "$multisite" = "1" ]; then
     wpcli="$wpcli --url=$url"

@@ -10,4 +10,4 @@ reject_list=$reject_list",_wc_session_"
 $wpcli total-cache option set dbcache.reject.sql --type=array --delimiter=, "$reject_list"
 
 echo "Creating fake products in WooCommerce"
-$wpcli import "$plugin_root/sample-data/sample-products.xml" --authors=create
+$wpcli import "$plugin_root/sample-data/sample_products.xml" --authors=create
