@@ -33,7 +33,7 @@ echo "Setting permalink structure"
 $wpcli rewrite structure "$permalink_structure"
 
 echo "Activating all plugins"
-plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1)"
+plugin_to_activate="$($wpcli plugin list --format=csv |tail -n+2|grep -E '[^,],inactive,'|cut -d, -f1 || true)"
 install_cache=false
 for plugin in ${plugin_to_activate}; do
 	if [ "${plugin}" = "w3-total-cache" ]; then
